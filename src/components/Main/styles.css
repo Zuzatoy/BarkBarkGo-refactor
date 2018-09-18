@@ -1,0 +1,19 @@
+.leftCorner {
+    padding: 10px;
+    width: 40%;
+    background: #f0f0f0;
+}
+
+.support {
+list-style-type: none;
+ padding: 0;
+}
+
+.mainDiv {
+display: flex
+}
+
+.suppMap {
+   flex: 1; 
+   padding: 10px
+}
