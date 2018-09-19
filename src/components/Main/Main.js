@@ -5,14 +5,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 export class Main extends React.Component {
     state = {
-    
         goodLisaImageKey: '',
         url: '',
         refresh: '',
         rssItems: [],
 
     }
-
 
     routes = [
         {
@@ -39,13 +37,22 @@ export class Main extends React.Component {
         {
           path: "/mymusiclist",
           sidebar: () => <div>Well now lets find what we have for dinnertonight</div>,
-          main: () => (
-            <Recepie />
-          )
+          main: () => {
+              const { ingregients, getIngregients, recepie, handleInputChange } = this.props;
+              return (
+                <Recepie
+                    ingregients={ingregients}
+                    getIngregients={getIngregients}
+                    recepie={recepie}
+                    handleInputChange={handleInputChange}
+                />
+              )
+          }
         }
       ]
     
       render() {
+
         return (
           <Router>
                 <div className='mainDiv'>
