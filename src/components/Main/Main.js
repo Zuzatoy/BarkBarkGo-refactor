@@ -1,11 +1,11 @@
 import React from 'react'
 import './styles.css'
+import { Recepie } from '../Recepie'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 export class Main extends React.Component {
     state = {
-        recepie: '',
-        ingregients: [],
+    
         goodLisaImageKey: '',
         url: '',
         refresh: '',
@@ -13,17 +13,6 @@ export class Main extends React.Component {
 
     }
 
-    handleChange = (e) => {
-        this.setState({
-          [e.target.name]: e.target.value
-        })
-      }
-
-    refreshSubmit = () => {
-        this.setState({
-            recepie: ''
-          })
-    }
 
     routes = [
         {
@@ -38,7 +27,7 @@ export class Main extends React.Component {
         {
           path: "/myinfo",
           sidebar: () => <div className='pageFontSize'>Some new for today from Meduza.io</div>,
-          main: () => //<News />
+          main: () => 
           <h1>Yo</h1>
         },
         {
@@ -50,8 +39,9 @@ export class Main extends React.Component {
         {
           path: "/mymusiclist",
           sidebar: () => <div>Well now lets find what we have for dinnertonight</div>,
-          main: () => //<Recepie />
-          <h1>Yo</h1>
+          main: () => (
+            <Recepie />
+          )
         }
       ]
     

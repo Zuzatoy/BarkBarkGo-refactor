@@ -1,0 +1,2 @@
+
+export { Recepie } from './Recepie';
