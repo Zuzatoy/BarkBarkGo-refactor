@@ -6,13 +6,26 @@ class App extends PureComponent {
     recepie: '',
     ingregients: [],
     goodLisaImageKey: '',
+    url: '',
+    refresh: ''
   }
 
   handleInputChange = (e) => {
     this.setState({
-        [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
+
+  getJoke = () => {
+    getRandomJoke()
+      .then((data) => (
+        this.setState(() => ({
+          url: data.value
+        })))
+      )
+  }
+
+
 
   getIngregients = () => {
     const apiKey = 'f54092bddcda7d43b61fc7889d1f439e';
