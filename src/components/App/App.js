@@ -36,6 +36,12 @@ class App extends PureComponent {
         <h1>Yo</h1>
     },
     {
+      path: "/myapi",
+      sidebar: () => <div className='pageFontSize'>API play</div>,
+      main: () =>
+        <h1>Yo</h1>
+    },
+    {
       path: "/shoelaces",
       sidebar: () => <div className='pageFontSize'>Chuck is cool, be like Chuck</div>,
       main: () => (
@@ -119,6 +125,9 @@ class App extends PureComponent {
               </li>
               <li>
                 <Link to="/mymusiclist">Recipes</Link>
+              </li>
+              <li>
+              <Link to="/myapi">Some play with ext API</Link>
               </li>
             </ul>
 
