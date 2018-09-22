@@ -1,16 +1,11 @@
 import React from 'react'
 import './styles.css'
 import { Recepie } from '../Recepie'
+import { Chuck } from '../Chuck'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 export class Main extends React.Component {
-    state = {
-        goodLisaImageKey: '',
-        url: '',
-        refresh: '',
-        rssItems: [],
 
-    }
 
     routes = [
         {
@@ -29,10 +24,17 @@ export class Main extends React.Component {
           <h1>Yo</h1>
         },
         {
-          path: "/shoelaces",
-          sidebar: () => <div className='pageFontSize'>Chuck is cool, be like Chuck</div>,
-          main: () => //<Chuck />
-          <h1>Yo</h1>
+            path: "/shoelaces",
+            sidebar: () => <div className='pageFontSize'>Chuck is cool, be like Chuck</div>,
+            main: () => {
+                const { url, getJoke } = this.props;
+                return (
+                    <Chuck
+                        url={url}
+                        getJoke={getJoke}
+                    />
+                )
+            }
         },
         {
           path: "/mymusiclist",
