@@ -2,6 +2,7 @@ import React from 'react'
 import './styles.css'
 import { Recepie } from '../Recepie'
 import { Chuck } from '../Chuck'
+import { Advice } from '../Advice'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 export class Main extends React.Component {
@@ -12,10 +13,16 @@ export class Main extends React.Component {
           path: "/myfriends",
           exact: true,
           sidebar: () => <div className='pageFontSize'>Lisa, be nice ^___^</div>,
-          main: () => (
-            // <Advice /> 
-            <h1>Yo</h1>
+          main: () =>  {
+            const { goodLisaImageKey } = this.props
+            return (
+             <Advice 
+             imageKey={goodLisaImageKey}
+             onButtonClick={this.updateGoodLisaImage}
+             /> 
+           
           )
+        }
         },
         {
           path: "/myinfo",
