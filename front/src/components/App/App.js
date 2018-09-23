@@ -5,9 +5,8 @@ import { Recepie } from '../Recepie';
 import { Chuck } from '../Chuck';
 import { Advice } from '../Advice';
 import { News } from '../News';
-
-import { getRandomJoke } from '../../api';
-import { getRSS } from '../../api';
+import { ApiPlay } from '../ApiPlay'
+import * as api from '../../api'
 
 class App extends PureComponent {
   state = {
@@ -16,7 +15,7 @@ class App extends PureComponent {
     url: '',
     refresh: '',
     goodLisaImageKey: '',
-    rssItems: [],
+    rssItems: []
   }
 
   routes = [
@@ -34,18 +33,27 @@ class App extends PureComponent {
     {
       path: "/myinfo",
       sidebar: () => <div className='pageFontSize'>Some new for today from Meduza.io</div>,
-      main: () =>(
-        <News 
+      main: () => (
+        <News
           rssItems={this.state.rssItems} // что бы передать дальше стейт мы должны обращаться через стейт
           getRSSdata={this.getRSSdata} // свойства класса обращаются через просто зис
-          />
-        )
+        />
+      )
     },
     {
       path: "/myapi",
       sidebar: () => <div className='pageFontSize'>API play</div>,
-      main: () => 
-      <h1>Yo</h1>
+      main: () => (
+        <ApiPlay
+          // handleChange={this.handleChange}
+          // handleClick={this.handleClick}
+        // name={this.state.name}
+        // email={this.state.email}
+        // password={this.state.password}
+        // country={this.state.country}
+        />
+      )
+
     },
     {
       path: "/shoelaces",
@@ -75,6 +83,28 @@ class App extends PureComponent {
     }
   ]
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  // handleClick = (e) => {
+  //   api.addUser(this.state)
+  //     .then(this.props.updateUserList)
+  // }
+
+  // {
+  //   name: 'Test',
+  //   email: 'test@test.tes',
+  //   password: '',
+  //   country: 'Test',
+  // }
+  // registerUser = (userData) => (
+  //   api.addUser(userData)
+  //     .then((response) => console.log(response))
+  // )
+
   handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -82,7 +112,7 @@ class App extends PureComponent {
   }
 
   getJoke = () => {
-    getRandomJoke()
+    api.getRandomJoke()
       .then((data) => (
         this.setState(() => ({
           url: data.value
@@ -99,13 +129,13 @@ class App extends PureComponent {
   }
 
   getRSSdata = () => {
-    getRSS()
-        .then((data) => (
-            this.setState(() => ({
-                rssItems: data.items,
-            })))
-        )
-}
+    api.getRSS()
+      .then((data) => (
+        this.setState(() => ({
+          rssItems: data.items,
+        })))
+      )
+  }
 
   getIngregients = () => {
     const apiKey = 'f54092bddcda7d43b61fc7889d1f439e';
@@ -142,7 +172,7 @@ class App extends PureComponent {
                 <Link to="/mymusiclist">Recipes</Link>
               </li>
               <li>
-              <Link to="/myapi">Some play with ext API</Link>
+                <Link to="/myapi">Some play with ext API</Link>
               </li>
             </ul>
 

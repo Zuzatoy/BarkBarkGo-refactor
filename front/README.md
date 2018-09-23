@@ -168,7 +168,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:4000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
@@ -276,7 +276,7 @@ Then add the block below to your `launch.json` file and put it inside the `.vsco
     "name": "Chrome",
     "type": "chrome",
     "request": "launch",
-    "url": "http://localhost:4000",
+    "url": "http://localhost:3000",
     "webRoot": "${workspaceRoot}/src",
     "sourceMapPathOverrides": {
       "webpack:///src/*": "${webRoot}/*"
@@ -1059,10 +1059,10 @@ Such setup is **not** required. However, if you **do** have a setup like this, i
 To tell the development server to proxy any unknown requests to your API server in development, add a `proxy` field to your `package.json`, for example:
 
 ```js
-  "proxy": "http://localhost:4000",
+  "proxy": "http://localhost:3000",
 ```
 
-This way, when you `fetch('/api/todos')` in development, the development server will recognize that it’s not a static asset, and will proxy your request to `http://localhost:4000/api/todos` as a fallback. The development server will **only** attempt to send requests without `text/html` in its `Accept` header to the proxy.
+This way, when you `fetch('/api/todos')` in development, the development server will recognize that it’s not a static asset, and will proxy your request to `http://localhost:3000/api/todos` as a fallback. The development server will **only** attempt to send requests without `text/html` in its `Accept` header to the proxy.
 
 Conveniently, this avoids [CORS issues](http://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) and error messages like this in development:
 
@@ -2009,7 +2009,7 @@ However this is not quite enough if you use client-side routing. Read the next s
 
 ### Serving Apps with Client-Side Routing
 
-If you use routers that use the HTML5 [`pushState` history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) under the hood (for example, [React Router](https://github.com/ReactTraining/react-router) with `browserHistory`), many static file servers will fail. For example, if you used React Router with a route for `/todos/42`, the development server will respond to `localhost:4000/todos/42` properly, but an Express serving a production build as above will not.
+If you use routers that use the HTML5 [`pushState` history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) under the hood (for example, [React Router](https://github.com/ReactTraining/react-router) with `browserHistory`), many static file servers will fail. For example, if you used React Router with a route for `/todos/42`, the development server will respond to `localhost:3000/todos/42` properly, but an Express serving a production build as above will not.
 
 This is because when there is a fresh page load for a `/todos/42`, the server looks for the file `build/todos/42` and does not find it. The server needs to be configured to respond to a request to `/todos/42` by serving `index.html`. For example, we can amend our Express example above to serve `index.html` for any unknown paths:
 
