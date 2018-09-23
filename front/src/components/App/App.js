@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Recepie } from '../Recepie';
 import { Chuck } from '../Chuck';
 import { Advice } from '../Advice';
+import { News } from '../News';
 
 import { getRandomJoke } from '../../api';
+import { getRSS } from '../../api';
 
 class App extends PureComponent {
   state = {
@@ -32,14 +34,18 @@ class App extends PureComponent {
     {
       path: "/myinfo",
       sidebar: () => <div className='pageFontSize'>Some new for today from Meduza.io</div>,
-      main: () =>
-        <h1>Yo</h1>
+      main: () =>(
+        <News 
+          rssItems={this.state.rssItems} // что бы передать дальше стейт мы должны обращаться через стейт
+          getRSSdata={this.getRSSdata} // свойства класса обращаются через просто зис
+          />
+        )
     },
     {
       path: "/myapi",
       sidebar: () => <div className='pageFontSize'>API play</div>,
-      main: () =>
-        <h1>Yo</h1>
+      main: () => 
+      <h1>Yo</h1>
     },
     {
       path: "/shoelaces",
@@ -91,6 +97,15 @@ class App extends PureComponent {
       goodLisaImageKey: randomKey,
     }))
   }
+
+  getRSSdata = () => {
+    getRSS()
+        .then((data) => (
+            this.setState(() => ({
+                rssItems: data.items,
+            })))
+        )
+}
 
   getIngregients = () => {
     const apiKey = 'f54092bddcda7d43b61fc7889d1f439e';
